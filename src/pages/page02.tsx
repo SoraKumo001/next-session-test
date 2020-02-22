@@ -96,7 +96,7 @@ export default ({ url }: PagesProps) => {
       </>
     );
   };
-  const { before, after }: RepoListQueryVariables = url.query;
+  const { before, after }: RepoListQueryVariables = url ? url.query : {};
   return (
     <>
       <style jsx>{`
