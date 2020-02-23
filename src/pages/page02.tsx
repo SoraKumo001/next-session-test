@@ -56,9 +56,9 @@ export default ({ url }: PagesProps) => {
           .reps:nth-child(odd) {
             background-color: ivory;
           }
-          .data {
+          .date {
             display: inline-block;
-            width: 20em;
+            width: 13em;
           }
         `}</style>
         <div>

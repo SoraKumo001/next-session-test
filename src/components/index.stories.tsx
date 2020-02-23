@@ -1,14 +1,14 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import Page from "./index";
-import Page02 from "./page02";
 import { apolloDecorator } from "../storybook/ApolloDecorator";
+import { Head } from "./Head";
+import { LinkBox } from "./LinkBox";
 
-storiesOf("Pages", module)
+storiesOf("Components", module)
   .addDecorator(apolloDecorator)
-  .add("index", () => {
-    return <Page />;
+  .add("Head", () => {
+    return <Head />;
   })
   .add("page02", () => {
-    return <Page02 />;
+    return <LinkBox href="">リンク</LinkBox>;
   });

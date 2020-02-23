@@ -32,7 +32,7 @@ function createClient(
 }
 
 export interface PagesProps {
-  url: ReturnType<typeof createUrl>;
+  url?: ReturnType<typeof createUrl>;
   graphqlToken?: string;
 }
 export interface Props {
