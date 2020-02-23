@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next export",
+    "export": "next build && next export",
     "storybook": "start-storybook",
     "reg-local": "node .github/scripts/reg-local",
     "capture": "npm-run-all -p -r sc:*",

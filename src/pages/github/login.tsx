@@ -16,14 +16,14 @@ const REDIRECT_URI = `http://localhost:${PORT}/github/login`;
 const GITHUB_URI = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
 
 export default class Login extends Component<
-  PagesProps & { gitHubToken?: string }
+  PagesProps & { gitHubToken?: string; code?: string }
 > {
   static async getInitialProps({
     req,
     res
   }: {
-    req: express.Request;
-    res: express.Response;
+    req?: express.Request;
+    res?: express.Response;
   }) {
     if (req && res) {
       const code = url.parse(req.url || "", true).query.code as
@@ -35,17 +35,13 @@ export default class Login extends Component<
           if (req.session) req.session.graphqlToken = gitHubToken;
           return { gitHubToken };
         }
-      } else {
-        res.writeHead(302, {
-          Location: GITHUB_URI
-        });
-        res.end();
+        return { code };
       }
-    } else window.open(GITHUB_URI);
+    }
     return {};
   }
   componentDidMount() {
-    const { gitHubToken } = this.props;
+    const { gitHubToken, code } = this.props;
     if (gitHubToken) {
       if (window.opener) {
         window.opener.postMessage(
@@ -55,6 +51,8 @@ export default class Login extends Component<
         );
       }
       close();
+    } else {
+      !code && window.location.replace(GITHUB_URI);
     }
   }
   render() {
